@@ -42,7 +42,7 @@ class MainApp(MDApp):
             pagina_addhr.ids['mensagem_erro'].text = ""
         except:
             pagina_addhr = self.root.ids['addhora']
-            pagina_addhr.ids['mensagem_erro'].text = 'PREENCHE O CAMPO COM HORAS/MINUTOS \n DE MAR! Exemplo: 1:0, 0:45'
+            pagina_addhr.ids['mensagem_erro'].text = 'PREENCHE O CAMPO COM HORAS/MINUTOS \n Exemplo: 1:0, 0:45'
             pagina_addhr.ids['mensagem_erro'].color = (1, 0, 0, 1)
 
 

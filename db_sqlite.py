@@ -46,13 +46,3 @@ class Sqlite:
 
 
 
-
-
-
-db = Sqlite()
-
-print(db.ler_infomacoes())
-
-
-
-

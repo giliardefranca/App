@@ -16,17 +16,17 @@
             text: ""
             bold: True
             markup: True
-            pos_hint: {"right": 0.89, "top": 0.7}
+            pos_hint: {"right": 0.89, "top": 0.73}
             size_hint: 0.8, 0.1
-            font_size: 10
+            font_size: 25
 
         Label:
-            text: "[color=#03768A]Adicione[/color] [color=#000000] Horas/Minutos [/color]"
+            text: "[color=#03768A]Adicione[/color]\n [color=#000000] Horas/Minutos [/color]"
             bold: True
             markup: True
-            pos_hint: {"right": 0.9, "top": 0.8}
+            pos_hint: {"right": 0.9, "top": .95}
             size_hint: 0.8, 0.20
-            font_size:20
+            font_size:40
 
         Label:
             text: "[color=#5A5E54] : [/color]"
@@ -34,7 +34,7 @@
             markup: True
             pos_hint: {"right": 0.68, "top": 0.61}
             size_hint: 0.4, 0.09
-            font_size:50
+            font_size:90
 
 
         MDTextField:
@@ -42,13 +42,16 @@
             hint_text: "Add\nHoras"
             pos_hint: {"right": 0.45, "top": 0.6}
             size_hint: 0.4, 0.09
-            background_color: utils.get_color_from_hex("#00B7C2")
-            hint_text_color: utils.get_color_from_hex("#C3C3C3")
-            font_size:15
-            line_color_normal: 1, 0, 1, 1
+            font_size:"25dp"
+            line_color_focus: utils.get_color_from_hex("#00B7C2")
             mode: "fill"
             icon_right: "clock"
             icon_right_color: app.theme_cls.primary_color
+
+
+            multiline: True
+
+
 
 
 
@@ -58,9 +61,10 @@
             pos_hint: {"right": 0.90, "top": 0.6}
             size_hint: 0.4, 0.09
             mode: "fill"
-            font_size:15
+            font_size:25
             icon_right: "clock"
             icon_right_color: app.theme_cls.primary_color
+            line_color_focus: utils.get_color_from_hex("#00B7C2")
 
 
         FloatLayout:
@@ -75,9 +79,9 @@
 
 
             ImageButton:
-                pos_hint: {"right":0.84, "top":3.1}
-                size_hint: 0.7, 1.1
-                source: "icones/add2.png" if self.state == "normal" else "icones/apert.png"
+                pos_hint: {"right":0.70, "top":3.1}
+                size_hint: 0.40, 0.5
+                source: "icones/add2.png" if self.state == "normal" else "icones/add2_apert.png"
                 on_press: app.Adicionar_horas()
 
 
@@ -87,7 +91,7 @@
                 text: "Giliarde Franca [color=#00cfdb]\n © 2022 [/color]"
                 bold: True
                 markup: True
-                font_size:13
+                font_size:15
 
 
             ImageButton:
