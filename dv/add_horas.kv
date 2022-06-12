@@ -18,7 +18,7 @@
             markup: True
             pos_hint: {"right": 0.89, "top": 0.73}
             size_hint: 0.8, 0.1
-            font_size: 25
+            font_size: "25dp"
 
         Label:
             text: "[color=#03768A]Adicione[/color]\n [color=#000000] Horas/Minutos [/color]"
@@ -26,7 +26,7 @@
             markup: True
             pos_hint: {"right": 0.9, "top": .95}
             size_hint: 0.8, 0.20
-            font_size:40
+            font_size:"45dp"
 
         Label:
             text: "[color=#5A5E54] : [/color]"
@@ -34,7 +34,7 @@
             markup: True
             pos_hint: {"right": 0.68, "top": 0.61}
             size_hint: 0.4, 0.09
-            font_size:90
+            font_size:"90dp"
 
 
         MDTextField:
@@ -42,14 +42,14 @@
             hint_text: "Add\nHoras"
             pos_hint: {"right": 0.45, "top": 0.6}
             size_hint: 0.4, 0.09
-            font_size:"25dp"
+            font_size:"30dp"
             line_color_focus: utils.get_color_from_hex("#00B7C2")
             mode: "fill"
             icon_right: "clock"
             icon_right_color: app.theme_cls.primary_color
 
 
-            multiline: True
+
 
 
 
@@ -61,7 +61,7 @@
             pos_hint: {"right": 0.90, "top": 0.6}
             size_hint: 0.4, 0.09
             mode: "fill"
-            font_size:25
+            font_size: "30dp"
             icon_right: "clock"
             icon_right_color: app.theme_cls.primary_color
             line_color_focus: utils.get_color_from_hex("#00B7C2")
@@ -91,7 +91,7 @@
                 text: "Giliarde Franca [color=#00cfdb]\n © 2022 [/color]"
                 bold: True
                 markup: True
-                font_size:15
+                font_size:"15dp"
 
 
             ImageButton:
