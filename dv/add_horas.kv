@@ -18,7 +18,7 @@
             markup: True
             pos_hint: {"right": 0.89, "top": 0.73}
             size_hint: 0.8, 0.1
-            font_size: "25dp"
+            font_size: "15dp"
 
         Label:
             text: "[color=#03768A]Adicione[/color]\n [color=#000000] Horas/Minutos [/color]"
@@ -34,7 +34,7 @@
             markup: True
             pos_hint: {"right": 0.68, "top": 0.61}
             size_hint: 0.4, 0.09
-            font_size:"90dp"
+            font_size:"85dp"
 
 
         MDTextField:
@@ -42,15 +42,12 @@
             hint_text: "Add\nHoras"
             pos_hint: {"right": 0.45, "top": 0.6}
             size_hint: 0.4, 0.09
-            font_size:"30dp"
+            font_size:"25dp"
             line_color_focus: utils.get_color_from_hex("#00B7C2")
             mode: "fill"
             icon_right: "clock"
             icon_right_color: app.theme_cls.primary_color
-
-
-
-
+            theme_text_color:'Primary'
 
 
 
@@ -61,7 +58,7 @@
             pos_hint: {"right": 0.90, "top": 0.6}
             size_hint: 0.4, 0.09
             mode: "fill"
-            font_size: "30dp"
+            font_size: "25dp"
             icon_right: "clock"
             icon_right_color: app.theme_cls.primary_color
             line_color_focus: utils.get_color_from_hex("#00B7C2")
@@ -79,8 +76,8 @@
 
 
             ImageButton:
-                pos_hint: {"right":0.70, "top":3.1}
-                size_hint: 0.40, 0.5
+                pos_hint: {"right":0.65, "top":3.1}
+                size_hint: 0.25, 0.3
                 source: "icones/add2.png" if self.state == "normal" else "icones/add2_apert.png"
                 on_press: app.Adicionar_horas()
 
