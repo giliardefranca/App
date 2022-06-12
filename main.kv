@@ -1,0 +1,25 @@
+#:include dv/homepage.kv
+#:include dv/add_horas.kv
+
+#:import utils kivy.utils
+
+FloatLayout:
+
+
+    Image:
+        pos_hint: {"right":0.7, "top":0.9}
+        size_hint: 1, 0.2
+        source: "icones/ico.png"
+
+    ScreenManager:
+        pos_hint: {"right":1, "top": 1}
+        size_hint: 1, 1
+        id: screen_manager
+        HomePage:
+            name: "homepage"
+            id: homepage
+        AddHora:
+            name: "addhora"
+            id: addhora
+
+

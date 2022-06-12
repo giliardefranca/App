@@ -1,0 +1,104 @@
+<AddHora>:
+
+
+#:import utils kivy.utils
+    MDFloatLayout:
+        canvas:
+            Color:
+                rgb: utils.get_color_from_hex("#EBE4E0")
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+
+
+        Label:
+            id: mensagem_erro
+            text: ""
+            bold: True
+            markup: True
+            pos_hint: {"right": 0.89, "top": 0.7}
+            size_hint: 0.8, 0.1
+            font_size: 10
+
+        Label:
+            text: "[color=#03768A]Adicione[/color] [color=#000000] Horas/Minutos [/color]"
+            bold: True
+            markup: True
+            pos_hint: {"right": 0.9, "top": 0.8}
+            size_hint: 0.8, 0.20
+            font_size:20
+
+        Label:
+            text: "[color=#5A5E54] : [/color]"
+            bold: True
+            markup: True
+            pos_hint: {"right": 0.68, "top": 0.61}
+            size_hint: 0.4, 0.09
+            font_size:50
+
+
+        MDTextField:
+            id: hora_input
+            hint_text: "Add\nHoras"
+            pos_hint: {"right": 0.45, "top": 0.6}
+            size_hint: 0.4, 0.09
+            background_color: utils.get_color_from_hex("#00B7C2")
+            hint_text_color: utils.get_color_from_hex("#C3C3C3")
+            font_size:15
+            line_color_normal: 1, 0, 1, 1
+            mode: "fill"
+            icon_right: "clock"
+            icon_right_color: app.theme_cls.primary_color
+
+
+
+        MDTextField:
+            id: minuto_input
+            hint_text: "Add\nMinutos"
+            pos_hint: {"right": 0.90, "top": 0.6}
+            size_hint: 0.4, 0.09
+            mode: "fill"
+            font_size:15
+            icon_right: "clock"
+            icon_right_color: app.theme_cls.primary_color
+
+
+        FloatLayout:
+            pos_hint: {"right":1, "top":0.07}
+            size_hint: 1, 0.2
+            canvas:
+                Color:
+                    rgb: utils.get_color_from_hex("#006D7E")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+
+            ImageButton:
+                pos_hint: {"right":0.84, "top":3.1}
+                size_hint: 0.7, 1.1
+                source: "icones/add2.png" if self.state == "normal" else "icones/apert.png"
+                on_press: app.Adicionar_horas()
+
+
+            Label:
+                pos_hint: {"right":0.55, "top":0.86}
+                size_hint: 0.1, 0.1
+                text: "Giliarde Franca [color=#00cfdb]\n © 2022 [/color]"
+                bold: True
+                markup: True
+                font_size:13
+
+
+            ImageButton:
+                pos_hint: {"right":0.3, "top":0.98}
+                size_hint: 0.4, 0.35
+                source: "icones/voltar.png"
+                on_release: app.mudartela("homepage")
+
+
+
+
+
+
+

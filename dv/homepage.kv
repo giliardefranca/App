@@ -1,0 +1,109 @@
+<HomePage>:
+#:import utils kivy.utils
+    MDFloatLayout:
+
+        canvas:
+            Color:
+                rgb: utils.get_color_from_hex("#222222")
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                source: "icones/bg.png"
+
+
+        Image:
+            pos_hint: {"right":0.7, "top":0.9}
+            size_hint: 1, 0.2
+            source: "icones/ico.png"
+
+        Label:
+            text: "CIMV 5.0 [color=#00cfdb] \n MAR [/color]"
+            bold: True
+            markup: True
+            pos_hint: {"right": 1.1, "top": 0.9}
+            size_hint: 0.8, 0.20
+            font_size:35
+
+        Label:
+            text: "TOTAL DE HORAS [color=#00cfdb]REGISTRADA [/color]"
+            bold: True
+            markup: True
+            pos_hint: {"right": .9, "top": 0.65}
+            size_hint: 0.8, 0.20
+            font_size:16
+
+
+
+        Label:
+            text: "[color=#00FF19] : [/color]"
+            bold: True
+            markup: True
+            pos_hint: {"right": 0.68, "top": 0.51}
+            size_hint: 0.4, 0.09
+            font_size:50
+
+
+        TextInput:
+            id: hora_input
+            hint_text: "Horas"
+            pos_hint: {"right": 0.45, "top": 0.5}
+            size_hint: 0.4, 0.09
+            background_color: utils.get_color_from_hex("#00B7C2")
+            hint_text_color: utils.get_color_from_hex("#C3C3C3")
+            font_size:25
+            radius: 5
+
+
+
+
+
+        TextInput:
+            id: minuto_input
+            hint_text: "Minutos"
+            pos_hint: {"right": 0.90, "top": 0.5}
+            size_hint: 0.4, 0.09
+            background_color: utils.get_color_from_hex("#00B7C2")
+            hint_text_color: utils.get_color_from_hex("#C3C3C3")
+            font_size:25
+
+
+
+
+        FloatLayout:
+            pos_hint: {"right":1, "top":0.07}
+            size_hint: 1, 0.2
+            canvas:
+                Color:
+                    rgb: utils.get_color_from_hex("#006D7E")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+
+            ImageButton:
+                pos_hint: {"right":1.0, "top":1.02}
+                size_hint: 0.3, 0.4
+                source: "icones/add.png"
+                on_release: app.mudartela("addhora")
+
+            ImageButton:
+                pos_hint: {"right":0.4, "top":1.26}
+                size_hint: 0.5, 0.9
+                source: "icones/zerar.png" if self.state == "normal" else "icones/zerar_apert.png"
+                on_release: app.reset()
+
+
+            Label:
+                pos_hint: {"right":0.55, "top":0.86}
+                size_hint: 0.1, 0.1
+                text: "Giliarde Franca [color=#00cfdb]\n © 2022 [/color]"
+                bold: True
+                markup: True
+                font_size:13
+
+
+
+
+
+
+
