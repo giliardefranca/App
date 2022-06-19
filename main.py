@@ -16,13 +16,14 @@ os.environ["SSL_CERT_FILE"] = certifi.where()
 
 
 class MainApp(MDApp):
-    dialog = None
+
 
     def build(self):
 
 
         self.firebase = MyFireBase()
         screen = Builder.load_file("main.kv")
+        self.icon = 'icones/re.png'
 
 
         return screen
