@@ -1,0 +1,61 @@
+<TrocarSenha>:
+
+
+    FloatLayout:
+        canvas:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+
+
+
+        MDTextField:
+            id: email_input
+            hint_text: "Digite seu E-mail"
+            pos_hint: {"right": 0.85, "top": 0.80}
+            size_hint: 0.68, 0.1
+            icon_right: "email"
+
+
+
+
+        MDIconButton:
+            pos_hint: {"right":0.9, "top":.97}
+            icon: "chevron-left"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 1, 1
+            text_color: utils.get_color_from_hex("#00ADF7")
+            pos_hint: {"right": 0.15, "top": .97}
+            on_release: app.mudartela('login')
+
+
+
+        MDFillRoundFlatButton:
+            text: "Enviar"
+            theme_text_color: "Custom"
+            text_color: utils.get_color_from_hex("#FFFFFF")
+            pos_hint: {"right": 0.33, "top": 0.7}
+            size_hint: 0.1, 0.06
+            md_bg_color: utils.get_color_from_hex("#00B7C2")
+            font_size:"14dp"
+            on_press: app.firebase.reset_password(email_input.text)
+
+
+        Label:
+            id: mensagem_erro
+            text: ""
+            pos_hint: {"right": 0.89, "top": 0.60}
+            size_hint: 0.8, 0.1
+            font_size: "15dp"
+            color: utils.get_color_from_hex("#00000")
+
+
+
+
+
+
+
+
+
+

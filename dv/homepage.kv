@@ -1,56 +1,42 @@
 <HomePage>:
 #:import utils kivy.utils
+
     MDFloatLayout:
 
         canvas:
             Color:
-                rgb: utils.get_color_from_hex("#222222")
-            RoundedRectangle:
+                rgb: utils.get_color_from_hex("#FFFDFF")
+            Rectangle:
                 size: self.size
                 pos: self.pos
-                source: "icones/bg.png"
 
-
-        Image:
-            pos_hint: {"right":0.7, "top":1.0}
-            size_hint: 1, 0.2
-            source: "icones/ico.png"
 
         Label:
-            text: "CIMV 5.0 [color=#00cfdb] \n MAR [/color]"
+            text: "[color=#000000]TOTAL DE HORAS \nREGISTRADA [/color]"
             bold: True
             markup: True
-            pos_hint: {"right": 1.1, "top": 1.0}
-            size_hint: 0.8, 0.20
-            font_size:"55dp"
-
-        Label:
-            text: "TOTAL DE HORAS [color=#00cfdb]\nREGISTRADA [/color]"
-            bold: True
-            markup: True
-            pos_hint: {"right": .90, "top": 0.67}
+            pos_hint: {"right": .90, "top": 0.8}
             size_hint: 0.8, 0.20
             font_size:"35dp"
 
 
 
         Label:
-            text: "[color=#00FF19] : [/color]"
-            bold: True
+            text: "[color=#000000] : [/color]"
             markup: True
-            pos_hint: {"right": 0.68, "top": 0.51}
+            pos_hint: {"right": 0.68, "top": 0.59}
             size_hint: 0.4, 0.09
-            font_size:"85dp"
+            font_size:"70dp"
 
 
         TextInput:
             id: hora_input
-            hint_text: "Horas"
-            pos_hint: {"right": 0.45, "top": 0.5}
-            size_hint: 0.4, 0.09
-            background_color: utils.get_color_from_hex("#00B7C2")
-            hint_text_color: utils.get_color_from_hex("#C3C3C3")
-            font_size:"40dp"
+            pos_hint: {"right": 0.46, "top": 0.6}
+            size_hint: 0.14, 0.15
+            background_color: utils.get_color_from_hex("#99D9EA")
+            font_size:"45dp"
+            halign: 'center'
+
 
 
 
@@ -59,12 +45,14 @@
 
         TextInput:
             id: minuto_input
-            hint_text: "Minutos"
-            pos_hint: {"right": 0.90, "top": 0.5}
-            size_hint: 0.4, 0.09
-            background_color: utils.get_color_from_hex("#00B7C2")
-            hint_text_color: utils.get_color_from_hex("#C3C3C3")
-            font_size:"40dp"
+            pos_hint: {"right": 0.63, "top": 0.6}
+            size_hint: 0.14, 0.15
+            background_color: utils.get_color_from_hex("#99D9EA")
+            font_size:"45dp"
+            halign: 'center'
+
+
+
 
 
 
@@ -80,17 +68,27 @@
                     pos: self.pos
 
 
-            ImageButton:
-                pos_hint: {"right":1.0, "top":1.02}
-                size_hint: 0.3, 0.4
-                source: "icones/add.png"
-                on_release: app.mudartela("addhora")
+            MDFloatingActionButton:
+                pos_hint: {"right":.9, "top":1.2}
+                icon: "plus"
+                opposite_colors: True
+                md_bg_color: 0, 0, 0, 0
+                markup: True
+                on_release: app.show_time_picker()
 
-            ImageButton:
-                pos_hint: {"right":0.3, "top":0.97}
-                size_hint: 0.3, 0.3
-                source: "icones/zerar.png" if self.state == "normal" else "icones/zerar_apert.png"
-                on_release: app.reset()
+
+
+
+
+            MDIconButton:
+                pos_hint: {"right":0.17, "top":1.2}
+                icon: "delete"
+                markup: True
+                on_release: app.dialogConfirmacao()
+                text_color: 1, 0, 0, 1
+                md_bg_color: app.theme_cls.primary_color
+
+
 
 
             Label:
@@ -100,6 +98,114 @@
                 bold: True
                 markup: True
                 font_size:"15dp"
+
+
+
+
+        MDIcon:
+            icon: "timer"
+            halign: "center"
+            theme_text_color: "Custom"
+            pos_hint: {"right": .93, "top": 0.57}
+            size_hint: 0.5, 0.09
+            markup: True
+            font_size: "60dp"
+            text_color: utils.get_color_from_hex("#00B7C2")
+
+
+        MDIcon:
+            icon: "timer"
+            halign: "center"
+            theme_text_color: "Custom"
+            pos_hint: {"right": 0.52, "top": 0.57}
+            size_hint: 0.5, 0.09
+            markup: True
+            font_size: "60dp"
+            text_color: utils.get_color_from_hex("#00B7C2")
+
+        MDIconButton:
+            icon: "cog-outline"
+            theme_text_color: "Custom"
+            text_color: utils.get_color_from_hex("#FFFFFF")
+            pos_hint: {"right": .65, "top": 0.2}
+            md_bg_color: utils.get_color_from_hex("#00B7C2")
+            on_press: app.mudartela("addhora")
+
+
+
+        MDIconButton:
+            icon: "calendar"
+            text: "Data de inicio"
+            theme_text_color: "Custom"
+            text_color: utils.get_color_from_hex("#FFFFFF")
+            pos_hint: {"right": .42, "top": 0.2}
+            md_bg_color: utils.get_color_from_hex("#00B7C2")
+            font_size:"13dp"
+            on_press: app.data_inicio()
+
+        Label:
+            pos_hint: {"right": .44, "top": 0.15}
+            size_hint: 0.1, 0.1
+            text: "Data de inicio"
+            bold: True
+            markup: True
+            font_size:"15dp"
+            color: utils.get_color_from_hex("#00000")
+
+        Label:
+            pos_hint: {"right": .67, "top": 0.15}
+            size_hint: 0.1, 0.1
+            text: "Settings"
+            bold: True
+            markup: True
+            font_size:"15dp"
+            color: utils.get_color_from_hex("#00000")
+
+
+
+
+        Label:
+            id: dias_restantes
+            text: ""
+            pos_hint: {"right":0.55, "top":0.95}
+            size_hint: 0.1, 0.1
+            bold: True
+            markup: True
+            font_size:"25dp"
+            color: utils.get_color_from_hex("#00000")
+
+        Label:
+            id: comeco
+            text: ""
+            pos_hint: {"right":0.54, "top":0.90}
+            size_hint: 0.1, 0.1
+            font_size:"18dp"
+            color: utils.get_color_from_hex("#00000")
+
+
+        Label:
+            text: "Hora"
+            pos_hint: {"right":0.44, "top":0.48}
+            size_hint: 0.1, 0.1
+            font_size:"18dp"
+            color: utils.get_color_from_hex("#00000")
+
+        Label:
+            text: "Minuto"
+            pos_hint: {"right":0.61, "top":0.48}
+            size_hint: 0.1, 0.1
+            font_size:"18dp"
+            color: utils.get_color_from_hex("#00000")
+
+
+
+
+
+
+
+
+
+
 
 
 
