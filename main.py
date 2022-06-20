@@ -239,7 +239,7 @@ class MainApp(MDApp):
             else:
                 self.dialogAviso("Campo Vazio*")
         except:
-            self.dialogAviso("Somente Numero")
+            self.dialogAviso("Apenas a quantidade de dias")
 
     def Objetivo_completado(self):
         link_banco_dados = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
