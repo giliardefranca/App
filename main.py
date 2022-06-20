@@ -31,6 +31,7 @@ class MainApp(MDApp):
 
         self.carregando_info_automatico()
 
+
     def mudartela(self, id_tela):
         gerenciador_tela = self.root.ids["screen_manager"]
         gerenciador_tela.current = id_tela
@@ -181,8 +182,8 @@ class MainApp(MDApp):
             dias_total = datetime.strptime(str(data), '%Y-%m-%d').date()
             dias_hoje= int((dias_total - date.today()).days)
             self.objetivo, data = self.Objetivo_100dias()
-            dias_hoje = self.objetivo - dias_hoje
-            return dias_hoje
+            self.dias_hoje = self.objetivo - dias_hoje
+            return self.dias_hoje
         except:
             self.dialogAviso("Sem conexão")
 
@@ -256,6 +257,8 @@ class MainApp(MDApp):
         refresh = open('refresh.txt', 'r+')
         refresh.truncate(0)
         self.mudartela("login")
+
+
 
 
 

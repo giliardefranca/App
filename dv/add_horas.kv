@@ -45,16 +45,16 @@
 
 
         MDIconButton:
-            pos_hint: {"right":0.55, "top":.18}
-            icon: "exit-to-app"
+            pos_hint: {"right":0.60, "top":.18}
+            icon: "power-standby"
             markup: True
-            text_color: utils.get_color_from_hex("#00ADF7")
+            text_color: utils.get_color_from_hex("#000000")
             theme_text_color: "Custom"
             on_release: app.SairAPP()
             user_font_size: "35sp"
 
         MDIconButton:
-            icon: "check"
+            icon: "send-clock"
             theme_text_color: "Custom"
             pos_hint: {"right": .63, "top": 0.67}
             on_press: app.Definir_dias_mar()

@@ -80,7 +80,7 @@
 
             MDIconButton:
                 pos_hint: {"right":0.17, "top":1.2}
-                icon: "delete"
+                icon: "delete-forever"
                 markup: True
                 on_release: app.dialogConfirmacao()
                 text_color: 1, 0, 0, 1
@@ -182,18 +182,19 @@
 
         Label:
             text: "Hora"
-            pos_hint: {"right":0.44, "top":0.48}
+            pos_hint: {"right":0.38, "top":0.48}
             size_hint: 0.1, 0.1
             font_size:"20dp"
             color: utils.get_color_from_hex("#00000")
 
         Label:
             text: "Minuto"
-            pos_hint: {"right":0.61, "top":0.48}
+            pos_hint: {"right":0.72, "top":0.48}
             size_hint: 0.1, 0.1
             font_size:"20dp"
             color: utils.get_color_from_hex("#00000")
 
+       
 
 
 
