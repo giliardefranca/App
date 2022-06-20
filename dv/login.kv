@@ -13,7 +13,7 @@
             markup: True
             pos_hint: {"right": .9, "top": 1.02}
             size_hint: 0.8, 0.20
-            font_size:"40dp"
+            font_size:"35dp"
 
         Label:
             id: mensagem_login
@@ -53,11 +53,8 @@
         MDFillRoundFlatButton:
             text: "Entrar"
             theme_text_color: "Custom"
-            text_color: utils.get_color_from_hex("#FFFFFF")
-            pos_hint: {"right": 0.7, "top": 0.35}
-            size_hint: 0.4, 0.09
-            md_bg_color: utils.get_color_from_hex("#00B7C2")
-            font_size:"17dp"
+            pos_hint: {"right": 0.6, "top": 0.35}
+            md_bg_color: app.theme_cls.primary_color
             on_press: app.firebase.FazerLogin(email_input.text, senha_input.text)
 
 
@@ -66,11 +63,9 @@
         MDFillRoundFlatButton:
             text: "Registrar"
             theme_text_color: "Custom"
-            text_color: utils.get_color_from_hex("#00B7C2")
-            pos_hint: {"right": 0.65, "top": 0.25}
-            size_hint: 0.3, 0.08
+            text_color: app.theme_cls.primary_color
+            pos_hint: {"right": 0.60, "top": 0.25}
             md_bg_color: 100, 100, 100, 0.5
-            font_size:"17dp"
             on_press: app.mudartela("criarconta")
 
 

@@ -18,19 +18,19 @@
             text: "[color=#000000]Dias sem [color=#00B7C2]MAR[/color] \n a ser compensado"
             pos_hint: {"right": 0.9, "top": .85}
             size_hint: 0.8, 0.20
-            font_size:"30dp"
+            font_size:"40dp"
             markup: True
 
 
 
 
         MDIconButton:
-            pos_hint: {"right":0.9, "top":.97}
             icon: "chevron-left"
             theme_text_color: "Custom"
             text_color: utils.get_color_from_hex("#00ADF7")
-            pos_hint: {"right": 0.15, "top": .97}
             on_release: app.mudartela('homepage')
+            pos_hint: {"right": .20, "top": .97}
+            murkup: True
 
 
 
@@ -39,24 +39,24 @@
         TextInput:
             id: padrao
             on_text: app.stored_text = self.text
-            size_hint: 0.16, 0.06
-            pos_hint: {"right": .53, "top": 0.65}
+            size_hint: 0.17, 0.07
+            pos_hint: {"right": .47, "top": 0.65}
             font_size: "20dp"
 
 
         MDIconButton:
-            pos_hint: {"right":0.48, "top":.18}
+            pos_hint: {"right":0.55, "top":.18}
             icon: "exit-to-app"
             markup: True
             text_color: utils.get_color_from_hex("#00ADF7")
             theme_text_color: "Custom"
-            on_release: app.mudartela("login")
-            user_font_size: "30sp"
+            on_release: app.SairAPP()
+            user_font_size: "35sp"
 
         MDIconButton:
             icon: "check"
             theme_text_color: "Custom"
-            pos_hint: {"right": .59, "top": 0.67}
+            pos_hint: {"right": .63, "top": 0.67}
             on_press: app.Definir_dias_mar()
             user_font_size: "35sp"
             text_color: utils.get_color_from_hex("#00ADF7")

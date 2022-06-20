@@ -13,7 +13,7 @@
             text: "[color=#00ADF7]Criar Conta[/color]"
             bold: True
             markup: True
-            pos_hint: {"right": 0.60, "top": .9}
+            pos_hint: {"right": 0.66, "top": .9}
             size_hint: 0.8, 0.1
             font_size:"30dp"
 
@@ -42,7 +42,7 @@
             icon: "chevron-left"
             theme_text_color: "Custom"
             text_color: 0, 0, 1, 1
-            text_color: utils.get_color_from_hex("#00ADF7")
+            text_color: app.theme_cls.primary_color
             pos_hint: {"right": 0.15, "top": .97}
             on_release: app.mudartela('login')
 
@@ -52,11 +52,8 @@
         MDFillRoundFlatButton:
             text: "Criar Conta"
             theme_text_color: "Custom"
-            text_color: utils.get_color_from_hex("#FFFFFF")
-            pos_hint: {"right": 0.54, "top": 0.5}
-            size_hint: 0.4, 0.09
-            md_bg_color: utils.get_color_from_hex("#00B7C2")
-            font_size:"17dp"
+            pos_hint: {"right": 0.48, "top": 0.5}
+            md_bg_color: app.theme_cls.primary_color
             on_press: app.firebase.CriarConta(email_input.text, senha_input.text)
 
 

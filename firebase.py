@@ -42,6 +42,7 @@ class MyFireBase():
                 link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{local_id}.json?auth={id_token}"
                 info_usuario = f'{{"Horas":"{00}", "Minutos": "{00}", "Data Inicial": "{date.today()}", "Total Dia": "0"}}'
                 requests.patch(link, data=info_usuario)
+                meu_aplicativo.dialogAviso("Conta Criada Com Sucesso!")
                 meu_aplicativo.mudartela('login')
 
 
@@ -89,8 +90,8 @@ class MyFireBase():
                 meu_aplicativo.id_token = id_token
                 with open('refresh.txt', 'w') as arquivo:
                     arquivo.write(refresh_token)
-
                 meu_aplicativo.mudartela('homepage')
+                meu_aplicativo.carregando_info_automatico()
             else:
                 mensagem_erro = requisicao_dic["error"]["message"]
                 if mensagem_erro == 'INVALID_EMAIL':

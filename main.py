@@ -109,21 +109,23 @@ class MainApp(MDApp):
         try:
             with open('refresh.txt', 'r') as arquivo:
                 refresh_token = arquivo.read()
-            local_id, id_token = self.firebase.trocar_token(refresh_token)
-            self.local_id = local_id
-            self.id_token = id_token
+                if refresh_token:
+                    local_id, id_token = self.firebase.trocar_token(refresh_token)
+                    self.local_id = local_id
+                    self.id_token = id_token
 
-            link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
-            requisicao = requests.get(link)
-            banco_de_dado = requisicao.json()
-            homepage = self.root.ids['homepage']
-            homepage.ids['minuto_input'].text = banco_de_dado['Minutos']
-            homepage = self.root.ids['homepage']
-            homepage.ids['hora_input'].text = banco_de_dado['Horas']
-            self.mudartela('homepage')
-            self.atualizar_dias_restante()
-            self.Objetivo_completado()
-
+                    link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+                    requisicao = requests.get(link)
+                    banco_de_dado = requisicao.json()
+                    homepage = self.root.ids['homepage']
+                    homepage.ids['minuto_input'].text = banco_de_dado['Minutos']
+                    homepage = self.root.ids['homepage']
+                    homepage.ids['hora_input'].text = banco_de_dado['Horas']
+                    self.mudartela('homepage')
+                    self.atualizar_dias_restante()
+                    self.Objetivo_completado()
+                else:
+                    self.mudartela("login")
 
         except:
             self.dialogAviso("Erro de Conexão, Tente Novamente!")
@@ -249,6 +251,11 @@ class MainApp(MDApp):
         dias_completado = self.TOTAL_DATA()
         if hora_completado >= "3" and dias_completado == 2:
             self.Congratulations(hora_completado, dias_completado)
+
+    def SairAPP(self):
+        refresh = open('refresh.txt', 'r+')
+        refresh.truncate(0)
+        self.mudartela("login")
 
 
 
