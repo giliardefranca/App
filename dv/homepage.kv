@@ -152,7 +152,7 @@
         Label:
             pos_hint: {"right": .64, "top": 0.15}
             size_hint: 0.1, 0.1
-            text: "Settings"
+            text: "Ajuste. Dia"
             bold: True
             markup: True
             font_size:"15dp"
@@ -194,7 +194,22 @@
             font_size:"20dp"
             color: utils.get_color_from_hex("#00000")
 
-       
+
+
+
+        MDProgressBar:
+            id: progress
+            value: 0
+            pos_hint: {"right": 1.0, "top":1.5}
+
+        Label:
+            id: porcentagem
+            text: "0% Progresso"
+            pos_hint: {"right": 1.0, "top":1.47}
+            color: utils.get_color_from_hex("#00000")
+
+
+
 
 
 

@@ -6,7 +6,7 @@
 
         canvas:
             Color:
-                rgb: utils.get_color_from_hex("#EBE4E0")
+                rgb: utils.get_color_from_hex("#FFFFFF")
             RoundedRectangle:
                 size: self.size
                 pos: self.pos
@@ -15,7 +15,7 @@
 
 
         Label:
-            text: "[color=#000000]Dias sem [color=#00B7C2]MAR[/color] \n a ser compensado"
+            text: "[color=#000000]Não fez [color=#00ADF7]MAR[/color] Hoje?"
             pos_hint: {"right": 0.9, "top": .85}
             size_hint: 0.8, 0.20
             font_size:"40dp"
@@ -25,7 +25,7 @@
 
 
         MDIconButton:
-            icon: "chevron-left"
+            icon: "arrow-left"
             theme_text_color: "Custom"
             text_color: utils.get_color_from_hex("#00ADF7")
             on_release: app.mudartela('homepage')
@@ -36,16 +36,8 @@
 
 
 
-        TextInput:
-            id: padrao
-            on_text: app.stored_text = self.text
-            size_hint: 0.17, 0.07
-            pos_hint: {"right": .47, "top": 0.65}
-            font_size: "20dp"
-
-
         MDIconButton:
-            pos_hint: {"right":0.60, "top":.18}
+            pos_hint: {"right":0.7, "top":.18}
             icon: "power-standby"
             markup: True
             text_color: utils.get_color_from_hex("#000000")
@@ -53,13 +45,15 @@
             on_release: app.SairAPP()
             user_font_size: "35sp"
 
-        MDIconButton:
-            icon: "send-clock"
+        MDFillRoundFlatButton:
+            text: "-1 Dia"
             theme_text_color: "Custom"
-            pos_hint: {"right": .63, "top": 0.67}
-            on_press: app.Definir_dias_mar()
-            user_font_size: "35sp"
-            text_color: utils.get_color_from_hex("#00ADF7")
+            pos_hint: {"right": .60, "top": 0.55}
+            on_press: app.dialogRemoverdia()
+            bold: True
+            markup: True
+
+
 
 
 

@@ -11,6 +11,12 @@ import certifi
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
 from kivymd.uix.picker import MDDatePicker, MDTimePicker
+from kivy.uix.progressbar import ProgressBar
+from kivy.loader import Loader
+
+
+
+
 
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
@@ -23,7 +29,8 @@ class MainApp(MDApp):
 
         self.firebase = MyFireBase()
         screen = Builder.load_file("main.kv")
-        self.icon = 'icones/re.png'
+        self.icon = 'icones/icon.png'
+        
 
 
         return screen
@@ -58,6 +65,7 @@ class MainApp(MDApp):
     def Adicionar_horas(self, instance, time):
 
         try:
+
             self.time = f"{time}".split(":")
             horas = self.time[0]
             minuto = self.time[1]
@@ -85,10 +93,11 @@ class MainApp(MDApp):
             horas = int(horas_banco)
             horas = horas + hora_atual
 
+
             self.Requisicao_patch_banco_dados(str(horas), str(minu_formatado), self.local_id)
 
 
-            self.carregando_info_automatico()
+
 
 
         except Exception as erro:
@@ -98,6 +107,7 @@ class MainApp(MDApp):
 
     def atualizar_dias_restante(self):
         dias = self.TOTAL_DATA()
+        self.bar(int(dias))
         homepage = self.root.ids['homepage']
         homepage.ids['dias_restantes'].text = f"{dias} Dias - De Mar"
         total_dias, data = self.Objetivo_100dias()
@@ -154,6 +164,16 @@ class MainApp(MDApp):
         )
         self.dialog.open()
 
+    def dialogRemoverdia(self):
+        self.dialog = MDDialog(
+            title = "Remover o Dia de Hoje",
+            text="Você tem Certeza?",
+            buttons=[
+                MDFlatButton(text="CANCEL", on_release=self.cancelar), MDRaisedButton(text="Confirmar", on_release=self.RemoverDia),
+            ],
+        )
+        self.dialog.open()
+
 
 
 
@@ -180,7 +200,7 @@ class MainApp(MDApp):
         try:
             hora, minuto, data, total_dias = self.Requisicao_get_banco_dados(self.local_id)
             dias_total = datetime.strptime(str(data), '%Y-%m-%d').date()
-            dias_hoje= int((dias_total - date.today()).days)
+            dias_hoje = int((dias_total - date.today()).days)
             self.objetivo, data = self.Objetivo_100dias()
             self.dias_hoje = self.objetivo - dias_hoje
             return self.dias_hoje
@@ -189,8 +209,11 @@ class MainApp(MDApp):
 
     def data_inicio(self):
         date_dialog = MDDatePicker()
+
         date_dialog.bind(on_save=self.on_save_inicio)
+
         date_dialog.open()
+
 
 
 
@@ -221,28 +244,19 @@ class MainApp(MDApp):
 
 
 
-    def Definir_dias_mar(self):
-        try:
-            dia_mar_perdido = self.root.ids['addhora']
-            dia_mar_perdido = dia_mar_perdido.ids["padrao"].text
-            if dia_mar_perdido:
-                dia_mar_perdido = int(dia_mar_perdido)
-                hora, minuto, data, dias_perdido = self.Requisicao_get_banco_dados(self.local_id)
-                dias = int(dias_perdido)
-                dias -= dia_mar_perdido
+    def RemoverDia(self, obj):
+        dia_mar_perdido = 1
+        hora, minuto, data, dias_perdido = self.Requisicao_get_banco_dados(self.local_id)
+        dias = int(dias_perdido)
+        dias -= dia_mar_perdido
+        link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+        horas_atualizada = f'{{"Total Dia":"{dias}"}}'
+        requests.patch(link, data=horas_atualizada)
+        self.atualizar_dias_restante()
+        self.dialog.dismiss()
+        self.mudartela("homepage")
 
-                link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
-                horas_atualizada = f'{{"Total Dia":"{dias}"}}'
-                requests.patch(link, data=horas_atualizada)
-                dia_mar = self.root.ids['addhora']
-                dia_mar.ids["padrao"].text = ""
-                self.dialogAviso("Alterado com Sucesso!")
-                self.atualizar_dias_restante()
-                self.mudartela("homepage")
-            else:
-                self.dialogAviso("Campo Vazio*")
-        except:
-            self.dialogAviso("Apenas a quantidade de dias")
+
 
     def Objetivo_completado(self):
         link_banco_dados = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
@@ -258,6 +272,10 @@ class MainApp(MDApp):
         refresh.truncate(0)
         self.mudartela("login")
 
+    def bar(self, progresso):
+        page = self.root.ids['homepage']
+        value = page.ids['progress'].value = progresso
+        page.ids['porcentagem'].text =f"{value}% Progresso"
 
 
 
