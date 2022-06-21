@@ -30,7 +30,7 @@ class MainApp(MDApp):
         self.firebase = MyFireBase()
         screen = Builder.load_file("main.kv")
         self.icon = 'icones/icon.png'
-        
+
 
 
         return screen
