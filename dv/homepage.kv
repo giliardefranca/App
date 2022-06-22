@@ -82,51 +82,21 @@
                 pos_hint: {"right":0.17, "top":1.2}
                 icon: "delete-forever"
                 markup: True
+                theme_text_color: "Custom"
                 on_release: app.dialogConfirmacao()
-                text_color: 1, 0, 0, 1
+                text_color: utils.get_color_from_hex("#FFFFFF")
                 md_bg_color: app.theme_cls.primary_color
 
 
 
 
-            Label:
-                pos_hint: {"right":0.60, "top":0.86}
-                size_hint: 0.1, 0.1
-                text: "Giliarde Franca [color=#00cfdb]\n © 2022 [/color]"
-                bold: True
-                markup: True
-                font_size:"15dp"
 
-
-
-
-        MDIcon:
-            icon: "timer"
-            halign: "center"
-            theme_text_color: "Custom"
-            pos_hint: {"right": 1.17, "top": 0.58}
-            size_hint: 0.5, 0.08
-            markup: True
-            font_size: "69dp"
-            text_color: utils.get_color_from_hex("#00B7C2")
-
-
-        MDIcon:
-            icon: "timer"
-            halign: "center"
-            theme_text_color: "Custom"
-            pos_hint: {"right": 0.33, "top": 0.58}
-            size_hint: 0.5, 0.09
-            markup: True
-            font_size: "69dp"
-            text_color: utils.get_color_from_hex("#00B7C2")
 
         MDIconButton:
             icon: "cog-outline"
             theme_text_color: "Custom"
             text_color: utils.get_color_from_hex("#FFFFFF")
-            pos_hint: {"right": .65, "top": 0.2}
-            md_bg_color: utils.get_color_from_hex("#00B7C2")
+            pos_hint: {"right": .65, "top": 0.08}
             on_press: app.mudartela("addhora")
 
 
@@ -136,14 +106,14 @@
             text: "Data de inicio"
             theme_text_color: "Custom"
             text_color: utils.get_color_from_hex("#FFFFFF")
-            pos_hint: {"right": .42, "top": 0.2}
-            md_bg_color: utils.get_color_from_hex("#00B7C2")
+            pos_hint: {"right": .42, "top": 0.08}
+
             on_press: app.data_inicio()
 
         Label:
-            pos_hint: {"right": .41, "top": 0.15}
+            pos_hint: {"right": .40, "top": 0.15}
             size_hint: 0.1, 0.1
-            text: "Data de inicio"
+            text: "Inicio"
             bold: True
             markup: True
             font_size:"15dp"
@@ -152,7 +122,7 @@
         Label:
             pos_hint: {"right": .64, "top": 0.15}
             size_hint: 0.1, 0.1
-            text: "Ajuste. Dia"
+            text: "Ajust. Dia"
             bold: True
             markup: True
             font_size:"15dp"

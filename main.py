@@ -97,7 +97,7 @@ class MainApp(MDApp):
             self.Requisicao_patch_banco_dados(str(horas), str(minu_formatado), self.local_id)
 
 
-
+            self.carregando_info_automatico()
 
 
         except Exception as erro:
