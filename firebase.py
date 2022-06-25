@@ -72,6 +72,7 @@ class MyFireBase():
 
 
     def FazerLogin(self, email, senha):
+
         try:
             link = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={self.API_KEY}"
 

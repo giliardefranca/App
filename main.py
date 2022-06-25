@@ -11,10 +11,6 @@ import certifi
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
 from kivymd.uix.picker import MDDatePicker, MDTimePicker
-from kivy.uix.progressbar import ProgressBar
-from kivy.loader import Loader
-
-
 
 
 
@@ -30,12 +26,9 @@ class MainApp(MDApp):
         self.firebase = MyFireBase()
         screen = Builder.load_file("main.kv")
         self.icon = 'icones/icon.png'
-
-
-
         return screen
-    def on_start(self):
 
+    def on_start(self):
         self.carregando_info_automatico()
 
 
@@ -56,6 +49,8 @@ class MainApp(MDApp):
         minu = int(minu)
         return horas, minu, data_inicial, dias_total_mar
 
+
+
     def Requisicao_patch_banco_dados(self,hora, minuto, local_id):
         link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{local_id}.json?auth={self.id_token}"
         horas_atualizada = f'{{"Horas":"{hora}", "Minutos": "{minuto}"}}'
@@ -63,9 +58,7 @@ class MainApp(MDApp):
 
 
     def Adicionar_horas(self, instance, time):
-
         try:
-
             self.time = f"{time}".split(":")
             horas = self.time[0]
             minuto = self.time[1]
@@ -95,7 +88,6 @@ class MainApp(MDApp):
 
 
             self.Requisicao_patch_banco_dados(str(horas), str(minu_formatado), self.local_id)
-
 
             self.carregando_info_automatico()
 
@@ -137,7 +129,6 @@ class MainApp(MDApp):
                     self.Objetivo_completado()
                 else:
                     self.mudartela("login")
-
         except:
             self.dialogAviso("Erro de Conexão, Tente Novamente!")
 
@@ -196,6 +187,7 @@ class MainApp(MDApp):
         except:
             self.dialogAviso("Sem conexão")
 
+
     def TOTAL_DATA(self):
         try:
             hora, minuto, data, total_dias = self.Requisicao_get_banco_dados(self.local_id)
@@ -241,6 +233,7 @@ class MainApp(MDApp):
         time_dialog = MDTimePicker()
         time_dialog.bind(on_save=self.Adicionar_horas)
         time_dialog.open()
+
 
 
 
