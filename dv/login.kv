@@ -21,11 +21,11 @@
 
         MDTextField:
             id: email_input
-            hint_text: "E-mail"
+            hint_text: "Usuário"
             pos_hint: {"right": 0.9, "top": 0.65}
             size_hint: 0.8, 0.1
             mode: "fill"
-            icon_right: "email"
+            icon_right: "account"
             theme_text_color:'Primary'
 
 
@@ -39,6 +39,7 @@
             mode: "fill"
             markup: True
 
+
         MDIconButton:
             icon: "eye-off"
             pos_hint: {"center_y": .5}
@@ -49,6 +50,8 @@
             on_release:
                 self.icon = "eye" if self.icon == "eye-off" else "eye-off"
                 senha_input.password = False if senha_input.password is True else True
+
+
 
 
 
