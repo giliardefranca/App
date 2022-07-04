@@ -35,15 +35,15 @@
 
 
         MDIconButton:
-            pos_hint: {"right":0.7, "top":.18}
+            pos_hint: {"right":0.9, "top":.96}
             icon: "logout"
             markup: True
             text_color: utils.get_color_from_hex("#ffffff")
             theme_text_color: "Custom"
             on_release: app.SairAPP()
-            md_bg_color: utils.get_color_from_hex("#ff0000")
+            md_bg_color: app.theme_cls.primary_color
             ripple_alpha: 1.0
-            ripple_color: app.theme_cls.primary_color
+
 
 
 
@@ -61,7 +61,6 @@
             text: "[color=#000000]Clique aqui[/color]"
             markup: True
             pos_hint: {"right": 0.98, "top": 1.08}
-
             font_size:"15dp"
 
 
