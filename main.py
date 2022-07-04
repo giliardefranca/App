@@ -14,6 +14,7 @@ from kivymd.uix.picker import MDDatePicker, MDTimePicker
 
 
 
+
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
 
@@ -21,8 +22,6 @@ class MainApp(MDApp):
 
 
     def build(self):
-
-
         self.firebase = MyFireBase()
         screen = Builder.load_file("main.kv")
         self.icon = 'icones/icon.png'
@@ -57,6 +56,8 @@ class MainApp(MDApp):
         requests.patch(link, data=horas_atualizada)
 
 
+
+
     def Adicionar_horas(self, instance, time):
         try:
             self.time = f"{time}".split(":")
@@ -86,14 +87,11 @@ class MainApp(MDApp):
             horas = int(horas_banco)
             horas = horas + hora_atual
 
-
             self.Requisicao_patch_banco_dados(str(horas), str(minu_formatado), self.local_id)
+            self.atualizar_outinput_horas_minutos()
 
-            self.carregando_info_automatico()
-
-
-        except Exception as erro:
-            msg = 'PREENCHE O CAMPO COM HORAS/MINUTOS \n Exemplo: 1:0, 0:45'
+        except:
+            msg = 'Sem conexão'
             self.dialogAviso(msg)
 
 
@@ -116,7 +114,6 @@ class MainApp(MDApp):
                     local_id, id_token = self.firebase.trocar_token(refresh_token)
                     self.local_id = local_id
                     self.id_token = id_token
-
                     link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
                     requisicao = requests.get(link)
                     banco_de_dado = requisicao.json()
@@ -126,18 +123,18 @@ class MainApp(MDApp):
                     homepage.ids['hora_input'].text = banco_de_dado['Horas']
                     self.mudartela('homepage')
                     self.atualizar_dias_restante()
-                    self.Objetivo_completado()
                 else:
                     self.mudartela("login")
         except:
             self.dialogAviso("Erro de Conexão, Tente Novamente!")
+
 
     def reset(self, obj):
         try:
             link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
             horas_atualizada = f'{{"Horas":"{0}", "Minutos": "{0}"}}'
             requests.patch(link, data=horas_atualizada)
-            self.carregando_info_automatico()
+            self.atualizar_outinput_horas_minutos()
             self.dialog.dismiss()
         except:
             pass
@@ -155,6 +152,7 @@ class MainApp(MDApp):
         )
         self.dialog.open()
 
+
     def dialogRemoverdia(self):
         self.dialog = MDDialog(
             title = "Remover o Dia de Hoje",
@@ -168,7 +166,7 @@ class MainApp(MDApp):
 
 
 
-    def on_save_inicio(self, instance, value, date_range):
+    def on_save_data_inicio(self, instance, value, date_range):
         try:
             link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
             horas_atualizada = f'{{"Data Inicial": "{value}"}}'
@@ -201,12 +199,8 @@ class MainApp(MDApp):
 
     def data_inicio(self):
         date_dialog = MDDatePicker()
-
-        date_dialog.bind(on_save=self.on_save_inicio)
-
+        date_dialog.bind(on_save=self.on_save_data_inicio)
         date_dialog.open()
-
-
 
 
     def dialogAviso(self, text):
@@ -217,6 +211,7 @@ class MainApp(MDApp):
         )
         self.dialog.md_bg_color = ("#00B7C2")
         self.dialog.open()
+
 
     def Congratulations(self, horas_mar, dias_mar):
         self.dialog = MDDialog(
@@ -232,6 +227,7 @@ class MainApp(MDApp):
     def show_time_picker(self):
         time_dialog = MDTimePicker()
         time_dialog.bind(on_save=self.Adicionar_horas)
+        time_dialog.title = "Selecione Horas/Minutos"
         time_dialog.open()
 
 
@@ -251,14 +247,6 @@ class MainApp(MDApp):
 
 
 
-    def Objetivo_completado(self):
-        link_banco_dados = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
-        requisicao = requests.get(link_banco_dados)
-        banco_de_dado = requisicao.json()
-        hora_completado = banco_de_dado['Horas']
-        dias_completado = self.TOTAL_DATA()
-        if hora_completado >= "3" and dias_completado == 2:
-            self.Congratulations(hora_completado, dias_completado)
 
     def SairAPP(self):
         refresh = open('refresh.txt', 'r+')
@@ -269,6 +257,25 @@ class MainApp(MDApp):
         page = self.root.ids['homepage']
         value = page.ids['progress'].value = progresso
         page.ids['porcentagem'].text =f"{value}% Progresso"
+
+
+    def atualizar_outinput_horas_minutos(self):
+        link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+        requisicao = requests.get(link)
+        banco_de_dado = requisicao.json()
+        homepage = self.root.ids['homepage']
+        homepage.ids['minuto_input'].text = banco_de_dado['Minutos']
+        homepage = self.root.ids['homepage']
+        homepage.ids['hora_input'].text = banco_de_dado['Horas']
+        hora_completado = banco_de_dado['Horas']
+        dias_completado = self.TOTAL_DATA()
+        if hora_completado >= "100" and dias_completado >= 100:
+            self.Congratulations(hora_completado, dias_completado)
+
+
+
+
+
 
 
 

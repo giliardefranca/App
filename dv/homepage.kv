@@ -81,11 +81,9 @@
                 markup: True
                 theme_text_color: "Custom"
                 on_release: app.dialogConfirmacao()
-                text_color: utils.get_color_from_hex("#FFFFFF")
+                text_color: utils.get_color_from_hex("#ffffff")
                 md_bg_color: app.theme_cls.primary_color
                 ripple_alpha: 1.5
-
-
 
 
 
@@ -101,6 +99,7 @@
 
 
         MDIconButton:
+            id: spiner
             icon: "calendar"
             text: "Data de inicio"
             theme_text_color: "Custom"
@@ -175,12 +174,12 @@
             pos_hint: {"right": 1.0, "top":1.47}
             color: utils.get_color_from_hex("#00000")
 
-        MDSpinner:
-            id:spin
-            size_hint: None, None
-            size: dp(46), dp(46)
-            pos_hint: {'center_x': .5, 'center_y': .5}
-            active: False
+
+
+
+
+
+
 
 
 

@@ -31,19 +31,17 @@
             on_release: app.mudartela('homepage')
             pos_hint: {"right": .20, "top": .97}
             murkup: True
-
-
-
+            ripple_alpha: 1.5
 
 
         MDIconButton:
             pos_hint: {"right":0.7, "top":.18}
-            icon: "power-standby"
+            icon: "logout"
             markup: True
-            text_color: utils.get_color_from_hex("#000000")
+            text_color: utils.get_color_from_hex("#ffffff")
             theme_text_color: "Custom"
             on_release: app.SairAPP()
-            user_font_size: "35sp"
+            md_bg_color: utils.get_color_from_hex("#ff0000")
             ripple_alpha: 1.0
             ripple_color: app.theme_cls.primary_color
 
@@ -57,6 +55,14 @@
             bold: True
             markup: True
             ripple_alpha: 1.5
+
+
+        Label:
+            text: "[color=#000000]Clique aqui[/color]"
+            markup: True
+            pos_hint: {"right": 0.98, "top": 1.08}
+
+            font_size:"15dp"
 
 
 

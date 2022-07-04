@@ -58,8 +58,7 @@
             theme_text_color: "Custom"
             pos_hint: {"right": 0.57, "top": 0.35}
             md_bg_color: app.theme_cls.primary_color
-            on_press: app.firebase.FazerLogin(email_input.text, senha_input.text)
-
+            on_release: app.firebase.FazerLogin(email_input.text, senha_input.text)
 
 
 
@@ -98,6 +97,13 @@
             user_font_size: "90sp"
             pos_hint: {"right": .65, "top": 0.87}
             theme_text_color: "Hint"
+
+
+
+
+
+
+
 
 
 
