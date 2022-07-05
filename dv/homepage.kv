@@ -1,4 +1,5 @@
 <HomePage>:
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
 #:import utils kivy.utils
 
     MDFloatLayout:
@@ -93,7 +94,9 @@
             theme_text_color: "Custom"
             text_color: utils.get_color_from_hex("#FFFFFF")
             pos_hint: {"right": .65, "top": 0.08}
-            on_press: app.mudartela("addhora")
+            on_press:
+                root.manager.transition.direction = "up"
+                app.mudartela("addhora")
             ripple_alpha: 1.5
 
 

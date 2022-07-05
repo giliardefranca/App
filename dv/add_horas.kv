@@ -1,5 +1,5 @@
 <AddHora>:
-
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
 
 #:import utils kivy.utils
     MDFloatLayout:
@@ -28,7 +28,9 @@
             icon: "arrow-left"
             theme_text_color: "Custom"
             text_color: utils.get_color_from_hex("#00ADF7")
-            on_release: app.mudartela('homepage')
+            on_release:
+                root.manager.transition.direction = "right"
+                app.mudartela('homepage')
             pos_hint: {"right": .20, "top": .97}
             murkup: True
             ripple_alpha: 1.5

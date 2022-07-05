@@ -1,6 +1,8 @@
-<Login>:
 
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
+<Login>:
     FloatLayout:
+
         canvas:
             Rectangle:
                 size: self.size
@@ -72,7 +74,9 @@
             text_color: app.theme_cls.primary_color
             pos_hint: {"right": 0.60, "top": 0.25}
             md_bg_color: 100, 100, 100, 0.5
-            on_press: app.mudartela("criarconta")
+            on_press:
+                root.manager.transition.direction = "up"
+                app.mudartela("criarconta")
 
 
 
@@ -90,7 +94,9 @@
             text: "Esqueceu sua senha?"
             pos_hint: {"right": 0.7, "top": 0.15}
             size_hint: 0.4, 0.2
-            on_press:  app.mudartela("trocarsenha")
+            on_press:
+                root.manager.transition.direction = "up"
+                app.mudartela("trocarsenha")
             color: utils.get_color_from_hex("#00000")
 
 
