@@ -1,4 +1,5 @@
 import math
+
 from datetime import datetime, date
 from kivymd.app import MDApp
 from kivy.lang import Builder
@@ -54,8 +55,6 @@ class MainApp(MDApp):
         link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{local_id}.json?auth={self.id_token}"
         horas_atualizada = f'{{"Horas":"{hora}", "Minutos": "{minuto}"}}'
         requests.patch(link, data=horas_atualizada)
-
-
 
 
     def Adicionar_horas(self, instance, time):
