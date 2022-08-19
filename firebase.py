@@ -40,7 +40,7 @@ class MyFireBase():
                     arquivo.write(refresh_token)
 
                 link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{local_id}.json?auth={id_token}"
-                info_usuario = f'{{"Horas":"{00}", "Minutos": "{00}", "Data Inicial": "{date.today()}", "Total Dia": "0"}}'
+                info_usuario = f'{{"Frases":"{0}","Horas":"{00}", "Minutos": "{00}", "Data Inicial": "{date.today()}", "Total Dia": "0"}}'
                 requests.patch(link, data=info_usuario)
                 meu_aplicativo.dialogAviso("Conta Criada Com Sucesso!")
                 meu_aplicativo.mudartela('login')

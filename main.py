@@ -26,9 +26,11 @@ class MainApp(MDApp):
         self.firebase = MyFireBase()
         screen = Builder.load_file("main.kv")
         self.icon = 'icones/icon.png'
+
         return screen
 
     def on_start(self):
+
         self.carregando_info_automatico()
 
 
@@ -41,33 +43,32 @@ class MainApp(MDApp):
     def Requisicao_get_banco_dados(self, local_id):
         link_banco_dados = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{local_id}.json?auth={self.id_token}"
         requisicao = requests.get(link_banco_dados)
-        dados_data_minutos = requisicao.json()
-        minu = dados_data_minutos['Minutos']
-        horas = dados_data_minutos['Horas']
-        dias_total_mar = dados_data_minutos['Total Dia']
-        data_inicial = dados_data_minutos['Data Inicial']
+        dados = requisicao.json()
+        minu = dados['Minutos']
+        horas = dados['Horas']
+        dias_total_mar = dados['Total Dia']
+        data_inicial = dados['Data Inicial']
+        frases = dados["Frases"]
+
         minu = int(minu)
-        return horas, minu, data_inicial, dias_total_mar
+        return horas, minu, data_inicial, dias_total_mar, frases
 
 
 
-    def Requisicao_patch_banco_dados(self,hora, minuto, local_id):
+    def Requisicao_patch_banco_dados(self,frases, hora, minuto, local_id):
         link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{local_id}.json?auth={self.id_token}"
-        horas_atualizada = f'{{"Horas":"{hora}", "Minutos": "{minuto}"}}'
+        horas_atualizada = f'{{"Frases": "{frases}","Horas":"{hora}", "Minutos": "{minuto}"}}'
         requests.patch(link, data=horas_atualizada)
 
 
-    def Adicionar_horas(self, instance, time):
+    def Adicionar_horas_minutos(self, instance, time):
         try:
             self.time = f"{time}".split(":")
             horas = self.time[0]
             minuto = self.time[1]
             hora = int(horas)
             minuto = int(minuto)
-
-
-            horas_banco, minuitos_banco, data, total_dia = self.Requisicao_get_banco_dados(self.local_id)
-
+            horas_banco, minuitos_banco, data, total_dia, frases = self.Requisicao_get_banco_dados(self.local_id)
 
             minu = minuitos_banco + minuto
             minutos = (int(minu) / 60)
@@ -86,7 +87,9 @@ class MainApp(MDApp):
             horas = int(horas_banco)
             horas = horas + hora_atual
 
-            self.Requisicao_patch_banco_dados(str(horas), str(minu_formatado), self.local_id)
+
+
+            self.Requisicao_patch_banco_dados(frases, str(horas), str(minu_formatado), self.local_id)
             self.atualizar_outinput_horas_minutos()
 
         except:
@@ -120,8 +123,11 @@ class MainApp(MDApp):
                     homepage.ids['minuto_input'].text = banco_de_dado['Minutos']
                     homepage = self.root.ids['homepage']
                     homepage.ids['hora_input'].text = banco_de_dado['Horas']
+                    homepage.ids['frases'].text = f'Frases Mineradas: {banco_de_dado["Frases"]}'
                     self.mudartela('homepage')
                     self.atualizar_dias_restante()
+
+
                 else:
                     self.mudartela("login")
         except:
@@ -141,13 +147,28 @@ class MainApp(MDApp):
     def cancelar(self, obj):
         self.dialog.dismiss()
 
+
+
+    def DeletarFrases(self, *args):
+        try:
+            link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+            horas_atualizada = f'{{"Frases":"{0}"}}'
+            requests.patch(link, data=horas_atualizada)
+            self.AtualizarCampoFrases()
+            self.dialog.dismiss()
+        except:
+            pass
+
+
     def dialogConfirmacao(self):
         self.dialog = MDDialog(
-            title = "Deletar Horas Registrada",
-            text="Você tem Certeza?",
+            title = "Deletar Horas Registrada/Frases",
+            text="O que deseja apagar?",
             buttons=[
-                MDFlatButton(text="CANCEL", on_release=self.cancelar), MDRaisedButton(text="Confirmar", on_release=self.reset),
+                MDFlatButton(text="CANCEL", on_release=self.cancelar),
+                MDRaisedButton(text="Frases", on_release=self.DeletarFrases), MDRaisedButton(text="Horas/Minutos", on_release=self.reset),
             ],
+
         )
         self.dialog.open()
 
@@ -160,7 +181,9 @@ class MainApp(MDApp):
                 MDFlatButton(text="CANCEL", on_release=self.cancelar), MDRaisedButton(text="Confirmar", on_release=self.RemoverDia),
             ],
         )
+
         self.dialog.open()
+
 
 
 
@@ -179,7 +202,7 @@ class MainApp(MDApp):
 
     def Objetivo_100dias(self):
         try:
-            hora, minuto, data, total_dias = self.Requisicao_get_banco_dados(self.local_id)
+            hora, minuto, data, total_dias, frases = self.Requisicao_get_banco_dados(self.local_id)
             return int(total_dias), data
         except:
             self.dialogAviso("Sem conexão")
@@ -187,7 +210,7 @@ class MainApp(MDApp):
 
     def TOTAL_DATA(self):
         try:
-            hora, minuto, data, total_dias = self.Requisicao_get_banco_dados(self.local_id)
+            hora, minuto, data, total_dias, frases = self.Requisicao_get_banco_dados(self.local_id)
             dias_total = datetime.strptime(str(data), '%Y-%m-%d').date()
             dias_hoje = int((dias_total - date.today()).days)
             self.objetivo, data = self.Objetivo_100dias()
@@ -196,10 +219,13 @@ class MainApp(MDApp):
         except:
             self.dialogAviso("Sem conexão")
 
+
+
     def data_inicio(self):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save_data_inicio)
         date_dialog.open()
+
 
 
     def dialogAviso(self, text):
@@ -225,7 +251,7 @@ class MainApp(MDApp):
 
     def show_time_picker(self):
         time_dialog = MDTimePicker()
-        time_dialog.bind(on_save=self.Adicionar_horas)
+        time_dialog.bind(on_save=self.Adicionar_horas_minutos)
         time_dialog.title = "Selecione Horas/Minutos"
         time_dialog.open()
 
@@ -234,7 +260,7 @@ class MainApp(MDApp):
 
     def RemoverDia(self, obj):
         dia_mar_perdido = 1
-        hora, minuto, data, dias_perdido = self.Requisicao_get_banco_dados(self.local_id)
+        hora, minuto, data, dias_perdido, frases = self.Requisicao_get_banco_dados(self.local_id)
         dias = int(dias_perdido)
         dias -= dia_mar_perdido
         link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
@@ -274,6 +300,26 @@ class MainApp(MDApp):
 
 
 
+    def Total_Frases_mineradas(self, *args):
+        try:
+            page = self.root.ids['homepage']
+            qdt_frases = page.ids['qtd'].value
+            hora, minuto, data, total_dias, frases = self.Requisicao_get_banco_dados(self.local_id)
+            qdt_frase = int(frases) + int(qdt_frases)
+            self.Requisicao_patch_banco_dados(int(qdt_frase), str(hora), str(minuto), self.local_id)
+            self.AtualizarCampoFrases()
+            page.ids['qtd'].value = 0
+        except:
+            self.dialogAviso("Sem Internet...")
+
+
+
+    def AtualizarCampoFrases(self):
+        link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+        requisicao = requests.get(link)
+        banco_de_dado = requisicao.json()
+        homepage = self.root.ids['homepage']
+        homepage.ids['frases'].text = f'Frases Mineradas: {banco_de_dado["Frases"]}'
 
 
 
