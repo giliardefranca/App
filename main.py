@@ -136,7 +136,7 @@ class MainApp(MDApp):
 
     def reset(self, obj):
         try:
-            link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+            link = f"https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
             horas_atualizada = f'{{"Horas":"{0}", "Minutos": "{0}"}}'
             requests.patch(link, data=horas_atualizada)
             self.atualizar_outinput_horas_minutos()
@@ -151,7 +151,7 @@ class MainApp(MDApp):
 
     def DeletarFrases(self, *args):
         try:
-            link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+            link = f"https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
             horas_atualizada = f'{{"Frases":"{0}"}}'
             requests.patch(link, data=horas_atualizada)
             self.AtualizarCampoFrases()
@@ -166,7 +166,7 @@ class MainApp(MDApp):
             text="O que deseja apagar?",
             buttons=[
                 MDFlatButton(text="CANCEL", on_release=self.cancelar),
-                MDRaisedButton(text="Frases", on_release=self.DeletarFrases), MDRaisedButton(text="Horas/Minutos", on_release=self.reset),
+                MDRaisedButton(text="Frases", on_release=self.DeletarFrases), MDRaisedButton(text="Horas", on_release=self.reset),
             ],
 
         )
@@ -190,7 +190,7 @@ class MainApp(MDApp):
 
     def on_save_data_inicio(self, instance, value, date_range):
         try:
-            link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
+            link = f"https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
             horas_atualizada = f'{{"Data Inicial": "{value}"}}'
             requests.patch(link, data=horas_atualizada)
             self.atualizar_dias_restante()
