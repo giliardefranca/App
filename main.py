@@ -145,7 +145,8 @@ class MainApp(MDApp):
             pass
 
     def cancelar(self, obj):
-        self.dialog.dismiss()
+
+        self.dialog.dismiss(force=True)
 
 
 
@@ -301,16 +302,16 @@ class MainApp(MDApp):
 
 
     def Total_Frases_mineradas(self, *args):
-        try:
-            page = self.root.ids['homepage']
-            qdt_frases = page.ids['qtd'].value
+        page = self.root.ids['homepage']
+        qdt_frases = page.ids['qtd'].value
+        if int(qdt_frases) > 10:
             hora, minuto, data, total_dias, frases = self.Requisicao_get_banco_dados(self.local_id)
             qdt_frase = int(frases) + int(qdt_frases)
             self.Requisicao_patch_banco_dados(int(qdt_frase), str(hora), str(minuto), self.local_id)
             self.AtualizarCampoFrases()
-            page.ids['qtd'].value = 0
-        except:
-            self.dialogAviso("Sem Internet...")
+        page.ids['qtd'].value = 0
+
+
 
 
 
@@ -320,8 +321,6 @@ class MainApp(MDApp):
         banco_de_dado = requisicao.json()
         homepage = self.root.ids['homepage']
         homepage.ids['frases'].text = f'Frases Mineradas: {banco_de_dado["Frases"]}'
-
-
 
 
 

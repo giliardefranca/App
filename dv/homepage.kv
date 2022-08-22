@@ -4,13 +4,6 @@
 
     MDFloatLayout:
 
-        canvas:
-            Color:
-                rgb: utils.get_color_from_hex("#FFFDFF")
-            Rectangle:
-                size: self.size
-                pos: self.pos
-
 
 
         Label:
@@ -53,38 +46,26 @@
 
 
 
-        FloatLayout:
-            pos_hint: {"right":1, "top":0.07}
-            size_hint: 1, 0.2
-            canvas:
-                Color:
-                    rgb: utils.get_color_from_hex("#006D7E")
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
 
 
-            MDFloatingActionButton:
-                pos_hint: {"right":.9, "top":1.2}
-                icon: "alarm-plus"
-                opposite_colors: True
-                md_bg_color: 0, 0, 0, 0
-                markup: True
-                on_release: app.show_time_picker()
-                ripple_alpha: 1.5
+        MDFloatingActionButton:
+            pos_hint: {"right":.96, "top":0.4}
+            icon: "plus"
+            md_bg_color: 0, 0, 0, 0
+            on_release: app.show_time_picker()
+            ripple_alpha: 0.8
 
 
 
 
-            MDIconButton:
-                pos_hint: {"right":0.17, "top":1.2}
-                icon: "delete-forever"
-                markup: True
-                theme_text_color: "Custom"
-                on_release: app.dialogConfirmacao()
-                text_color: utils.get_color_from_hex("#ffffff")
-                md_bg_color: app.theme_cls.primary_color
-                ripple_alpha: 0.8
+        MDIconButton:
+            pos_hint: {"right":.96, "top":.3}
+            icon: "delete-forever"
+            theme_text_color: "Custom"
+            on_release: app.dialogConfirmacao()
+            text_color: utils.get_color_from_hex("#ffffff")
+            md_bg_color: app.theme_cls.primary_color
+            ripple_alpha: 0.8
 
 
 
@@ -92,12 +73,13 @@
         MDIconButton:
             icon: "cog-outline"
             theme_text_color: "Custom"
-            text_color: utils.get_color_from_hex("#FFFFFF")
-            pos_hint: {"right": .65, "top": 0.08}
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {"right":.96, "top":.1}
             on_press:
                 root.manager.transition.direction = "up"
                 app.mudartela("addhora")
             ripple_alpha: 1.5
+            text_color: utils.get_color_from_hex("#ffffff")
 
 
 
@@ -105,27 +87,12 @@
             icon: "calendar"
             text: "Data de inicio"
             theme_text_color: "Custom"
-            text_color: utils.get_color_from_hex("#FFFFFF")
-            pos_hint: {"right": .42, "top": 0.08}
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {"right":.96, "top":.2}
             on_press: app.data_inicio()
+            text_color: utils.get_color_from_hex("#ffffff")
 
-        Label:
-            pos_hint: {"right": .40, "top": 0.15}
-            size_hint: 0.1, 0.1
-            text: "Inicio"
-            bold: True
-            markup: True
-            font_size:"15dp"
-            color: utils.get_color_from_hex("#00000")
 
-        Label:
-            pos_hint: {"right": .64, "top": 0.15}
-            size_hint: 0.1, 0.1
-            text: "Ajust. Dia"
-            bold: True
-            markup: True
-            font_size:"15dp"
-            color: utils.get_color_from_hex("#00000")
 
 
 
