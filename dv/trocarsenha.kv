@@ -22,13 +22,13 @@
 
         MDIconButton:
             pos_hint: {"right":0.9, "top":.97}
-            icon: "chevron-left"
+            icon: "chevron-down"
             theme_text_color: "Custom"
             text_color: 0, 0, 1, 1
             text_color: app.theme_cls.primary_color
-            pos_hint: {"right": 0.15, "top": .97}
+            pos_hint: {"right": 0.55, "top": .2}
             on_release:
-                root.manager.transition.direction = "right"
+                root.manager.transition.direction = "down"
                 app.mudartela('login')
             ripple_alpha: 1.5
 

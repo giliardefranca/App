@@ -1,7 +1,7 @@
 
 #: import WipeTransition kivy.uix.screenmanager.WipeTransition
 <Login>:
-    FloatLayout:
+    MDScreen:
 
         canvas:
             Rectangle:
@@ -17,7 +17,13 @@
             size_hint: 0.8, 0.20
             font_size:"35dp"
 
-
+        Label:
+            text: "[color=#000000][b]Login[/b][/color]"
+            bold: True
+            markup: True
+            pos_hint: {"right": .9, "top": 0.85}
+            size_hint: 0.8, 0.20
+            font_size:"25dp"
 
 
 
@@ -47,7 +53,7 @@
             pos_hint: {"center_y": .5}
             pos_hint: {"right": .9, "top": 0.52}
             theme_text_color: "Hint"
-            ripple_alpha: 1.0
+            ripple_alpha: 0.5
             ripple_color: app.theme_cls.primary_color
             on_release:
                 self.icon = "eye" if self.icon == "eye-off" else "eye-off"

@@ -44,8 +44,6 @@ class MyFireBase():
                 requests.patch(link, data=info_usuario)
                 meu_aplicativo.dialogAviso("Conta Criada Com Sucesso!")
                 meu_aplicativo.mudartela('login')
-
-
             else:
                 mensagem_erro = requisicao_dic["error"]["message"]
                 if mensagem_erro == 'MISSING_EMAIL':
@@ -72,7 +70,6 @@ class MyFireBase():
 
 
     def FazerLogin(self, email, senha):
-
         try:
             link = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={self.API_KEY}"
 

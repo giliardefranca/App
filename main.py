@@ -1,5 +1,4 @@
 import math
-
 from datetime import datetime, date
 from kivymd.app import MDApp
 from kivy.lang import Builder
@@ -16,16 +15,24 @@ from kivymd.uix.picker import MDDatePicker, MDTimePicker
 
 
 
+
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
 
 class MainApp(MDApp):
+    data = {
+        'Add': 'plus',
+        'Calendario': 'calendar',
+        'Deletar': 'delete-forever',
+        'Conf': 'cog-outline',
+    }
 
 
     def build(self):
         self.firebase = MyFireBase()
         screen = Builder.load_file("main.kv")
         self.icon = 'icones/icon.png'
+
 
         return screen
 
@@ -39,6 +46,17 @@ class MainApp(MDApp):
         gerenciador_tela.current = id_tela
 
 
+    def callback(self, instance):
+        if instance.icon == 'plus':
+            self.show_time_picker()
+        elif instance.icon == 'calendar':
+            self.data_inicio()
+        elif instance.icon == 'delete-forever':
+            self.dialogConfirmacao()
+        elif instance.icon == 'cog-outline':
+            self.mudartela("addhora")
+
+
 
     def Requisicao_get_banco_dados(self, local_id):
         link_banco_dados = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{local_id}.json?auth={self.id_token}"
@@ -49,7 +67,6 @@ class MainApp(MDApp):
         dias_total_mar = dados['Total Dia']
         data_inicial = dados['Data Inicial']
         frases = dados["Frases"]
-
         minu = int(minu)
         return horas, minu, data_inicial, dias_total_mar, frases
 
@@ -99,7 +116,6 @@ class MainApp(MDApp):
 
     def atualizar_dias_restante(self):
         dias = self.TOTAL_DATA()
-        self.bar(int(dias))
         homepage = self.root.ids['homepage']
         homepage.ids['dias_restantes'].text = f"{dias} Dias - De Mar"
         total_dias, data = self.Objetivo_100dias()
@@ -126,8 +142,6 @@ class MainApp(MDApp):
                     homepage.ids['frases'].text = f'Frases Mineradas: {banco_de_dado["Frases"]}'
                     self.mudartela('homepage')
                     self.atualizar_dias_restante()
-
-
                 else:
                     self.mudartela("login")
         except:
@@ -172,6 +186,7 @@ class MainApp(MDApp):
 
         )
         self.dialog.open()
+
 
 
     def dialogRemoverdia(self):
@@ -225,7 +240,9 @@ class MainApp(MDApp):
     def data_inicio(self):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save_data_inicio)
+        date_dialog.title = "Selecione o Inicio"
         date_dialog.open()
+
 
 
 
@@ -279,10 +296,6 @@ class MainApp(MDApp):
         refresh.truncate(0)
         self.mudartela("login")
 
-    def bar(self, progresso):
-        page = self.root.ids['homepage']
-        value = page.ids['progress'].value = progresso
-        page.ids['porcentagem'].text =f"{value}% Progresso"
 
 
     def atualizar_outinput_horas_minutos(self):

@@ -2,7 +2,7 @@
 #: import WipeTransition kivy.uix.screenmanager.WipeTransition
 #:import utils kivy.utils
 
-    MDFloatLayout:
+    MDScreen:
 
 
 
@@ -48,55 +48,6 @@
 
 
 
-        MDFloatingActionButton:
-            pos_hint: {"right":.96, "top":0.4}
-            icon: "plus"
-            md_bg_color: 0, 0, 0, 0
-            on_release: app.show_time_picker()
-            ripple_alpha: 0.8
-
-
-
-
-        MDIconButton:
-            pos_hint: {"right":.96, "top":.3}
-            icon: "delete-forever"
-            theme_text_color: "Custom"
-            on_release: app.dialogConfirmacao()
-            text_color: utils.get_color_from_hex("#ffffff")
-            md_bg_color: app.theme_cls.primary_color
-            ripple_alpha: 0.8
-
-
-
-
-        MDIconButton:
-            icon: "cog-outline"
-            theme_text_color: "Custom"
-            md_bg_color: app.theme_cls.primary_color
-            pos_hint: {"right":.96, "top":.1}
-            on_press:
-                root.manager.transition.direction = "up"
-                app.mudartela("addhora")
-            ripple_alpha: 1.5
-            text_color: utils.get_color_from_hex("#ffffff")
-
-
-
-        MDIconButton:
-            icon: "calendar"
-            text: "Data de inicio"
-            theme_text_color: "Custom"
-            md_bg_color: app.theme_cls.primary_color
-            pos_hint: {"right":.96, "top":.2}
-            on_press: app.data_inicio()
-            text_color: utils.get_color_from_hex("#ffffff")
-
-
-
-
-
-
         Label:
             id: dias_restantes
             text: ""
@@ -131,16 +82,10 @@
             color: utils.get_color_from_hex("#00000")
 
 
-        MDProgressBar:
-            id: progress
-            value: 0
-            pos_hint: {"right": 1.0, "top":1.5}
 
-        Label:
-            id: porcentagem
-            text: "0% Progresso"
-            pos_hint: {"right": 1.0, "top":1.47}
-            color: utils.get_color_from_hex("#00000")
+
+
+
 
         Label:
             id: frases
@@ -158,6 +103,12 @@
             on_active: app.Total_Frases_mineradas(*args)
             pos_hint: {"right": 0.85, "top": .52}
             size_hint: 0.7, 0.25
+
+        MDFloatingActionButtonSpeedDial:
+            data: app.data
+            root_button_anim: True
+            callback: app.callback
+
 
 
 
