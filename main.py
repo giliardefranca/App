@@ -10,7 +10,7 @@ import os
 import certifi
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
-from kivymd.uix.picker import MDDatePicker, MDTimePicker
+from kivymd.uix.pickers import MDDatePicker, MDTimePicker
 
 
 
@@ -21,7 +21,7 @@ os.environ["SSL_CERT_FILE"] = certifi.where()
 
 class MainApp(MDApp):
     data = {
-        'Add': 'plus',
+        'Add Horas': 'plus',
         'Calendario': 'calendar',
         'Deletar': 'delete-forever',
         'Conf': 'cog-outline',
@@ -37,7 +37,6 @@ class MainApp(MDApp):
         return screen
 
     def on_start(self):
-
         self.carregando_info_automatico()
 
 
@@ -105,7 +104,6 @@ class MainApp(MDApp):
             horas = horas + hora_atual
 
 
-
             self.Requisicao_patch_banco_dados(frases, str(horas), str(minu_formatado), self.local_id)
             self.atualizar_outinput_horas_minutos()
 
@@ -159,7 +157,6 @@ class MainApp(MDApp):
             pass
 
     def cancelar(self, obj):
-
         self.dialog.dismiss(force=True)
 
 
@@ -317,7 +314,7 @@ class MainApp(MDApp):
     def Total_Frases_mineradas(self, *args):
         page = self.root.ids['homepage']
         qdt_frases = page.ids['qtd'].value
-        if int(qdt_frases) > 10:
+        if int(qdt_frases) >= 10:
             hora, minuto, data, total_dias, frases = self.Requisicao_get_banco_dados(self.local_id)
             qdt_frase = int(frases) + int(qdt_frases)
             self.Requisicao_patch_banco_dados(int(qdt_frase), str(hora), str(minuto), self.local_id)
