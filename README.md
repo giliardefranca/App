@@ -1,7 +1,7 @@
 # App Registrador Horas do curso de ingles Mairo Vergara
 
 # Ferramentas
-- kyvy
+- kyvymd
 - firebase
 - requests
 
