@@ -25,13 +25,13 @@
 
 
         MDIconButton:
-            icon: "arrow-left"
+            icon: "chevron-down"
             theme_text_color: "Custom"
             text_color: utils.get_color_from_hex("#00ADF7")
             on_release:
                 root.manager.transition.direction = "down"
                 app.mudartela('homepage')
-            pos_hint: {"right": .20, "top": .97}
+            pos_hint: {"right": .55, "top": .20}
             murkup: True
             ripple_alpha: 1.5
 
