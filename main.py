@@ -1,5 +1,7 @@
 import math
 from datetime import datetime, date
+
+from kivy.uix.popup import Popup
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from botoes import *
@@ -11,6 +13,7 @@ import certifi
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton, MDRaisedButton
 from kivymd.uix.pickers import MDDatePicker, MDTimePicker
+
 
 
 
@@ -157,7 +160,7 @@ class MainApp(MDApp):
             pass
 
     def cancelar(self, obj):
-        self.dialog.dismiss(force=True)
+        self.dialog.dismiss()
 
 
 
@@ -196,7 +199,6 @@ class MainApp(MDApp):
         )
 
         self.dialog.open()
-
 
 
 
@@ -287,7 +289,6 @@ class MainApp(MDApp):
 
 
 
-
     def SairAPP(self):
         refresh = open('refresh.txt', 'r+')
         refresh.truncate(0)
@@ -324,7 +325,6 @@ class MainApp(MDApp):
 
 
 
-
     def AtualizarCampoFrases(self):
         link = f" https://registradordehoras-9e0d4-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.id_token}"
         requisicao = requests.get(link)
@@ -332,6 +332,20 @@ class MainApp(MDApp):
         homepage = self.root.ids['homepage']
         homepage.ids['frases'].text = f'Frases Mineradas: {banco_de_dado["Frases"]}'
 
+
+
+    def InstrucaoDeUso(self):
+
+        popup = Popup(title='INSTRUÇÃO DE USO',title_align="center",
+                      content=Label(text=f'       AVISO: Se você esta começando o Mar hoje, não \nprecisa fazer nada, os dias já estão sendo contado!  '
+                                         'A-\ncaso você já esta fazendo o Mar algum tempo, seleci-\none o dia no icone de calendario para  '
+                                         'calcular a\nquantidade de dias.\n\n     ADD HORAS/MINUTOS: Para add HORA, clique icone +\n'
+                                         'e arraste o ponteiro na hora desejada.\n     Para add MINUTOS, selecione minutos clicando sobre\nele'
+                                         ' e arraste o ponteiro.\n\n      IMPORTANTE: Para ADD apenas MINUTOS, deixa o\n PONTEIRO de '
+                                         'HORAS no 12 AM.\n\n     ADD FRASE: apenas arraste o ponto azul na quant-\nidade '
+                                         'desejada. OBJ: no minino 10 frases.'),
+                      size_hint=(None, None), size=(410, 410), )
+        popup.open()
 
 
 MainApp().run()

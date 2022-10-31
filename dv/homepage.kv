@@ -95,6 +95,15 @@
             color: utils.get_color_from_hex("#00000")
 
 
+        MDRoundFlatIconButton:
+            pos_hint: {"right":0.65, "top":0.20}
+            text: "INSTRUÇÃO DE USO"
+            icon: "alert-circle"
+            text_color: "black"
+            on_release: app.InstrucaoDeUso()
+
+
+
 
 
         MDSlider:
@@ -108,11 +117,6 @@
             root_button_anim: True
             callback: app.callback
             icon:"menu"
-
-
-
-
-
 
 
 
