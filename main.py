@@ -143,6 +143,7 @@ class MainApp(MDApp):
                     homepage.ids['frases'].text = f'Frases Mineradas: {banco_de_dado["Frases"]}'
                     self.mudartela('homepage')
                     self.atualizar_dias_restante()
+
                 else:
                     self.mudartela("login")
         except:
@@ -258,7 +259,7 @@ class MainApp(MDApp):
     def Congratulations(self, horas_mar, dias_mar):
         self.dialog = MDDialog(
             title="Congratulations!!",
-            text=f"[color=#000000]Seu Objetivo foi Concluido! \n [s] {horas_mar}Horas de Mar [/s] e [s] {dias_mar} Dias de Mar [/s] [/color]",
+            text=f"[color=#000000]Seu Objetivo foi Concluido! \n [s] {horas_mar} Horas de Mar [/s] e [s] {dias_mar} Dias de Mar [/s] [/color]",
             radius=[20, 7, 20, 7],
         )
         self.dialog.md_bg_color = ("#00B7C2")
@@ -306,7 +307,7 @@ class MainApp(MDApp):
         homepage.ids['hora_input'].text = banco_de_dado['Horas']
         hora_completado = banco_de_dado['Horas']
         dias_completado = self.TOTAL_DATA()
-        if hora_completado >= "100" and dias_completado >= 100:
+        if int(hora_completado) >= 100 and int(dias_completado) >= 100:
             self.Congratulations(hora_completado, dias_completado)
 
 
@@ -337,9 +338,10 @@ class MainApp(MDApp):
     def InstrucaoDeUso(self):
 
         popup = Popup(title='INSTRUÇÃO DE USO',title_align="center",
-                      content=Label(text=f'       AVISO: Se você esta começando o Mar hoje, não \nprecisa fazer nada, os dias já estão sendo contado!  '
+                      content=Label(text=f'       ATENÇÃO: Se você esta começando o Mar hoje, não \nprecisa fazer nada, os dias já estão sendo contado!  '
                                          'A-\ncaso você já esta fazendo o Mar algum tempo, seleci-\none o dia no icone de calendario para  '
-                                         'calcular a\nquantidade de dias.\n\n     ADD HORAS/MINUTOS: Para add HORA, clique icone +\n'
+                                         'calcular a quan-\ntidade de dias já feito até o momento. Obs: acaso não\nfizer o mar em um determinado dia, você pode '
+                                         'remover\nesse dia no icone de conf.\n\n     ADD HORAS/MINUTOS: Para add HORA, clique icone +\n'
                                          'e arraste o ponteiro na hora desejada.\n     Para add MINUTOS, selecione minutos clicando sobre\nele'
                                          ' e arraste o ponteiro.\n\n      IMPORTANTE: Para ADD apenas MINUTOS, deixa o\n PONTEIRO de '
                                          'HORAS no 12 AM.\n\n     ADD FRASE: apenas arraste o ponto azul na quant-\nidade '

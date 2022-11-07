@@ -97,7 +97,8 @@
 
         MDRoundFlatIconButton:
             pos_hint: {"right":0.65, "top":0.20}
-            text: "INSTRUÇÃO DE USO"
+            markup: True
+            text: "[b]INSTRUÇÃO DE USO[/b]"
             icon: "alert-circle"
             text_color: "black"
             on_release: app.InstrucaoDeUso()
@@ -117,13 +118,6 @@
             root_button_anim: True
             callback: app.callback
             icon:"menu"
-
-
-
-
-
-
-
 
 
 
