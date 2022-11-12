@@ -1,6 +1,5 @@
 import math
 from datetime import datetime, date
-
 from kivy.uix.popup import Popup
 from kivymd.app import MDApp
 from kivy.lang import Builder
@@ -336,18 +335,8 @@ class MainApp(MDApp):
 
 
     def InstrucaoDeUso(self):
+        self.mudartela("instrucao")
 
-        popup = Popup(title='INSTRUÇÃO DE USO',title_align="center",
-                      content=Label(text=f'       ATENÇÃO: Se você esta começando o Mar hoje, não \nprecisa fazer nada, os dias já estão sendo contado!  '
-                                         'A-\ncaso você já esta fazendo o Mar algum tempo, seleci-\none o dia no icone de calendario para  '
-                                         'calcular a quan-\ntidade de dias já feito até o momento. Obs: acaso não\nfizer o mar em um determinado dia, você pode '
-                                         'remover\nesse dia no icone de conf.\n\n     ADD HORAS/MINUTOS: Para add HORA, clique icone +\n'
-                                         'e arraste o ponteiro na hora desejada.\n     Para add MINUTOS, selecione minutos clicando sobre\nele'
-                                         ' e arraste o ponteiro.\n\n      IMPORTANTE: Para ADD apenas MINUTOS, deixa o\n PONTEIRO de '
-                                         'HORAS no 12 AM.\n\n     ADD FRASE: apenas arraste o ponto azul na quant-\nidade '
-                                         'desejada. OBJ: no minino 10 frases.'),
-                      size_hint=(None, None), size=(410, 410), )
-        popup.open()
 
 
 MainApp().run()

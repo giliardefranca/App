@@ -3,6 +3,7 @@
 #:include dv/login.kv
 #:include dv/criarconta.kv
 #:include dv/trocarsenha.kv
+#:include dv/instrucao.kv
 #:import utils kivy.utils
 
 
@@ -14,11 +15,18 @@ FloatLayout:
         size_hint: 1, 1
         id: screen_manager
 
-
-
         Login:
             name: "login"
             id: login
+
+
+
+        Instrucao:
+            name: "instrucao"
+            id: "instrucao"
+
+
+
 
 
         TrocarSenha:
@@ -38,6 +46,8 @@ FloatLayout:
         CriarConta:
             name: "criarconta"
             id: criarconta
+
+
 
 
 

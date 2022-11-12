@@ -1,0 +1,48 @@
+<Instrucao>:
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
+#:import utils kivy.utils
+
+    MDScreen:
+        canvas:
+            Color:
+                rgb: utils.get_color_from_hex("#FFFFFF")
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+
+
+        Label:
+            text: "[color=#000000][b]ATENÇÃO[/b]: Se você esta começando o Mar hoje, não \nprecisa fazer nada, os dias já estão sendo contados! A-\ncaso você já esta fazendo o Mar algum tempo, seleci-\none o dia no icone de calendario      para calcular a quan-\ntidade de dias já feito até o momento. [b]Obs[/b]: acaso não\nfizer o mar em um determinado dia, você pode remover\nesse dia no icone de conf.\n\n     [b]ADD HORAS/MINUTOS[/b]: Para add HORA, clique icone \ne arraste o ponteiro na hora desejada.\n     Para [b]Add MINUTOS[/b], selecione minutos clicando sobre\nele e arraste o ponteiro.\n\n      [b]IMPORTANTE[/b]: Para ADD apenas MINUTOS, deixa o\n PONTEIRO de HORAS no [b]12 AM[/b].\n\n     [b]ADD FRASE[/b]: apenas arraste o ponto azul na quant-\nidade desejada. [b]OBJ[/b]: no minino 10 frases.[/color]"
+            markup: True
+            pos_hint: {"right": 0.98, "top": 1.08}
+            font_size:"15dp"
+
+        MDIcon:
+            icon: "cog-outline"
+            pos_hint: {"right":0.5, "top":.67}
+            theme_text_color: "Custom"
+            text_color: "blue"
+
+        MDIcon:
+            icon: "plus"
+            pos_hint: {"right":0.90, "top":.61}
+            theme_text_color: "Custom"
+            text_color: "blue"
+
+        MDIcon:
+            icon: "calendar"
+            pos_hint: {"right":0.58, "top":.76}
+            theme_text_color: "Custom"
+            text_color: "blue"
+
+        MDIconButton:
+            icon: "chevron-down"
+            theme_text_color: "Custom"
+            text_color: utils.get_color_from_hex("#00ADF7")
+            on_release:
+                root.manager.transition.direction = "down"
+                app.mudartela('homepage')
+            pos_hint: {"right": .55, "top": .20}
+            murkup: True
+            ripple_alpha: 1.5
+

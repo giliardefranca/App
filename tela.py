@@ -21,5 +21,8 @@ class CriarConta(Screen):
 class TrocarSenha(Screen):
     pass
 
+class Instrucao(Screen):
+    pass
+
 
 
