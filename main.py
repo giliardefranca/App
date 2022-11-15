@@ -334,8 +334,7 @@ class MainApp(MDApp):
 
 
 
-    def InstrucaoDeUso(self):
-        self.mudartela("instrucao")
+
 
 
 
